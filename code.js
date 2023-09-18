@@ -128,7 +128,7 @@ function calcArea() {
 
 function showData(id) {
 	const types = {"0": "Circle", "1": "BeamUpper", "2": "BeamMiddle", "3": "Cross", "4": "Section"}
-	const p1Val = {"0": "Diameter", "1": "Width", "2": "Width", "3": "Width", "4": "Diameter"}
+	const p1Val = {"0": "Radius", "1": "Width", "2": "Width", "3": "Width", "4": "Radius"}
 	const p2Val = {"1": "Height", "2": "Height", "3": "Height", "4": "Central Angle*0.0174.."}
 	const dict  = {"0": `<b>Is Area:</b> ${!!(areaArray[id][0])}`, "1": `<b>Type:</b> ${types[areaArray[id][1]]}`, "2": `<b>${p1Val[areaArray[id][1]]}:</b> ${areaArray[id][2]}`, "3": `<b>${p2Val[areaArray[id][1]]}:</b> ${areaArray[id][3]}`, "4": `<b>X-Offset:</b> ${areaArray[id][4]}`, "5": `<b>Y-Offset:</b> ${areaArray[id][5]}`, "6": `<b>Direction Kind:</b> ${areaArray[id][6]}`, "7": `<b>Direction Degrees:</b> ${areaArray[id][7]}`}
 	
@@ -198,8 +198,8 @@ function showCircleArea(id,radius,xoffset,yoffset) {
 	sc[id].querySelector(".skill").style.width = (radius*resRatio) + "px";
 	sc[id].querySelector(".skill").style.height = (radius*resRatio) + "px";
 	sc[id].querySelector(".skill").style.borderRadius = "50%";
-	yoffset = yoffset != 0 ? Math.max(((yoffset/2) - radius)*resRatio,(radius - (yoffset/2))*resRatio) : yoffset
-	xoffset = xoffset != 0 ? Math.max(((yoffset/2) - radius)*resRatio,(radius - (yoffset/2))*resRatio) : xoffset
+	yoffset = yoffset*resRatio/2
+	xoffset = xoffset*resRatio/2
 	sc[id].querySelector(".skill").style.left = parseInt(pb.style.left)+8 - ((radius/2)*resRatio);
 	sc[id].querySelector(".skill").style.top = parseInt(pb.style.top)+8 - ((radius/2)*resRatio);
 	sc[id].querySelector(".skill").style.top = parseInt(sc[id].querySelector(".skill").style.top) - yoffset
