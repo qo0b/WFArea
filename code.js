@@ -62,6 +62,7 @@ function loadData() {
 		}).then(json => json
 			.filter(char => char.DevNicknames in names)
 			.map(char => ({ ENName: names[char.DevNicknames], ...char }))
+			.toSorted((a, b) => a.ENName.localeCompare(b.ENName))
 			.concat(json
 				.filter(char => !(char.DevNicknames in names))
 				.map(char => ({ ENName: char.DevNicknames, ...char }))
