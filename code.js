@@ -5,6 +5,8 @@ var resRatio = 0.0;
 	
 var areaArray = [];
 
+var data = { chars: [] };
+
 var dd,
 	rd,
 	ba,
@@ -16,13 +18,16 @@ var dd,
 
 window.onload = function() {
 	setSelectors();
-	placePlayer(0,0)
-	populateDropdown();
-	calcResolution();
-	calcArea();
-	ba.addEventListener('click', setPosition)
-	dd.forEach((item) => item.addEventListener('change', calcArea))
-	rd.addEventListener('change', calcResolution)
+	placePlayer(0,0);
+	loadData().then(chars => {
+		data.chars = chars;
+		populateDropdown();
+		calcResolution();
+		calcArea();
+		ba.addEventListener('click', setPosition)
+		dd.forEach((item) => item.addEventListener('change', calcArea))
+		rd.addEventListener('change', calcResolution)
+	});
 }
 
 function setSelectors() {
@@ -45,6 +50,23 @@ function setPosition(event) {
 	} catch(e) {
 		return console.error(e);
 	}
+}
+
+function loadData() {
+	return fetch("https://raw.githubusercontent.com/blead/eliyabot-assets/master/processed/wfarea.json")
+		.then(response => {
+			if(!response.ok) {
+				throw new Error("HTTP request error " + response.status);
+			}
+			return response.json();
+		}).then(json => json
+			.filter(char => char.DevNicknames in names)
+			.map(char => ({ ENName: names[char.DevNicknames], ...char }))
+			.concat(json
+				.filter(char => !(char.DevNicknames in names))
+				.map(char => ({ ENName: char.DevNicknames, ...char }))
+			)
+		);
 }
 
 function populateDropdown() {
