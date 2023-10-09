@@ -59,15 +59,14 @@ function loadData() {
 				throw new Error("HTTP request error " + response.status);
 			}
 			return response.json();
-		}).then(json => {
-			return json
-				.filter(char => char.DevNicknames in names)
-				.map(char => ({ ENName: names[char.DevNicknames], ...char }))
-				.concat(json
-					.filter(char => !(char.DevNicknames in names))
-					.map(char => ({ ENName: char.DevNicknames, ...char }))
-				);
-		});
+		}).then(json => json
+			.filter(char => char.DevNicknames in names)
+			.map(char => ({ ENName: names[char.DevNicknames], ...char }))
+			.concat(json
+				.filter(char => !(char.DevNicknames in names))
+				.map(char => ({ ENName: char.DevNicknames, ...char }))
+			)
+		);
 }
 
 function populateDropdown() {
