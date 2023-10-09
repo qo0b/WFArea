@@ -56,9 +56,9 @@ function loadData() {
 	return fetch("https://raw.githubusercontent.com/blead/eliyabot-assets/master/processed/wfarea.json")
 		.then(response => {
 			if(!response.ok) {
-				throw new Error("HTTP request error " + response.status)
+				throw new Error("HTTP request error " + response.status);
 			}
-			return response.json()
+			return response.json();
 		}).then(json => {
 			return json
 				.filter(char => char.DevNicknames in names)
