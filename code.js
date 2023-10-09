@@ -62,6 +62,7 @@ function loadData() {
 		}).then(json => json
 			.filter(char => char.DevNicknames in names)
 			.map(char => ({ ENName: names[char.DevNicknames], ...char }))
+			.toSorted((a, b) => a.ENName.localeCompare(b.ENName))
 			.concat(json
 				.filter(char => !(char.DevNicknames in names))
 				.map(char => ({ ENName: char.DevNicknames, ...char }))
@@ -105,7 +106,7 @@ function calcArea() {
 	areaArray[i] = [parseInt(charData[charData.length-8]),parseInt(charData[charData.length-7]),parseInt(charData[charData.length-6]),parseInt(charData[charData.length-5]),parseInt(charData[charData.length-4]),parseInt(charData[charData.length-3]),parseInt(charData[charData.length-2]),parseInt(charData[charData.length-1])]
 	showData(i);
 	let e = document.querySelectorAll(".skillContainer")[i].querySelector("#cross")
-	if(e != null) {x
+	if(e != null) {
 		e.parentElement.removeChild(e)
 	}
 	if(!+(areaArray[i][0])) {
@@ -274,64 +275,64 @@ function showCrossArea(id,width,height,xoffset,yoffset,kind,degrees) {
 }
 
 function test(width,height) {
-	 var orientationX = NaN;
-	 var orientationY = NaN;
-	 var screenScale = NaN;
-	 var temp = 0;
-	 var topMarginSafeArea = NaN;
-	 var fullSizeNormalize = NaN;
-	 var fullScreenWidth = parseInt(width)
-	 var fullScreenHeight = parseInt(height)
-	 if(fullScreenWidth > fullScreenHeight)
-	 {
+	var orientationX = NaN;
+	var orientationY = NaN;
+	var screenScale = NaN;
+	var temp = 0;
+	var topMarginSafeArea = NaN;
+	var fullSizeNormalize = NaN;
+	var fullScreenWidth = parseInt(width)
+	var fullScreenHeight = parseInt(height)
+	if(fullScreenWidth > fullScreenHeight)
+	{
 		temp = fullScreenHeight;
 		fullScreenHeight = fullScreenWidth;
 		fullScreenWidth = temp;
-	 }
-	 var widthHeightRatio = fullScreenWidth / fullScreenHeight;
-	 if(widthHeightRatio < 0.5625)
-	 {
+	}
+	var widthHeightRatio = fullScreenWidth / fullScreenHeight;
+	if(widthHeightRatio < 0.5625)
+	{
 		topMarginSafeArea = fullScreenWidth / 0.5625;
 		orientationX = 0;
 		orientationY = (fullScreenHeight - topMarginSafeArea) / 2;
 		screenScale = topMarginSafeArea / 1920;
-	 }
-	 else
-	 {
+	}
+	else
+	{
 		if(0.75 < widthHeightRatio)
 		{
-		   orientationX = (fullScreenHeight * 0.75 - fullScreenHeight * 0.5625) / 2;
+		orientationX = (fullScreenHeight * 0.75 - fullScreenHeight * 0.5625) / 2;
 		}
 		else
 		{
-		   orientationX = (fullScreenWidth - fullScreenHeight * 0.5625) / 2;
+		orientationX = (fullScreenWidth - fullScreenHeight * 0.5625) / 2;
 		}
 		orientationY = 0;
 		screenScale = fullScreenHeight / 1920;
-	 }
-	 var isScreenNormal = fullScreenWidth <= 755 && fullScreenWidth >= 745 && fullScreenHeight <= 1339 && fullScreenHeight >= 1329;
-	 if(isScreenNormal)
-	 {
+	}
+	var isScreenNormal = fullScreenWidth <= 755 && fullScreenWidth >= 745 && fullScreenHeight <= 1339 && fullScreenHeight >= 1329;
+	if(isScreenNormal)
+	{
 		orientationX += (fullScreenWidth - (Number(719.928 + orientationX * 2))) / 2;
 		orientationY += (fullScreenHeight - (Number(1279.8719999999998 + orientationY * 2))) / 2;
 		screenScale = 0.6666;
-	 }
-	 topMarginSafeArea = 0;
-	 var bottomMarginSafeArea = 0;
-	 if(widthHeightRatio < 0.49)
-	 {
+	}
+	topMarginSafeArea = 0;
+	var bottomMarginSafeArea = 0;
+	if(widthHeightRatio < 0.49)
+	{
 		topMarginSafeArea = 115;
 		bottomMarginSafeArea = 89;
-	 }
-	 var fullSize = fullScreenHeight / screenScale;
-	 if(fullSize > 2339)
-	 {
+	}
+	var fullSize = fullScreenHeight / screenScale;
+	if(fullSize > 2339)
+	{
 		fullSizeNormalize = (fullSize - 2339) * 0.5;
 		topMarginSafeArea += _loc12_;
 		bottomMarginSafeArea += _loc12_;
-	 }
-	 var showStatusBar = widthHeightRatio < 0.49;
-	 return {
+	}
+	var showStatusBar = widthHeightRatio < 0.49;
+	return {
 		"orientX":orientationX,
 		"orientY":orientationY,
 		"screenWidth":fullScreenWidth,
@@ -340,5 +341,5 @@ function test(width,height) {
 		"safeAreaTopMargin":topMarginSafeArea,
 		"safeAreaBottomMargin":bottomMarginSafeArea,
 		"canShowPlatformStatusBar":showStatusBar
-	 };
-  }
+	};
+}
