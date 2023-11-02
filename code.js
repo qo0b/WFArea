@@ -62,7 +62,7 @@ function loadData() {
 		}).then(json => json
 			.filter(char => char.DevNicknames in names)
 			.map(char => ({ ENName: names[char.DevNicknames], ...char }))
-			.toSorted((a, b) => a.ENName.localeCompare(b.ENName))
+			.sort((a, b) => a.ENName.localeCompare(b.ENName))
 			.concat(json
 				.filter(char => !(char.DevNicknames in names))
 				.map(char => ({ ENName: char.DevNicknames, ...char }))
@@ -102,7 +102,6 @@ function calcArea() {
 	} else {
 		i = areaArray.length;
 	}
-	console.log(i)
 	areaArray[i] = [parseInt(charData[charData.length-8]),parseInt(charData[charData.length-7]),parseInt(charData[charData.length-6]),parseInt(charData[charData.length-5]),parseInt(charData[charData.length-4]),parseInt(charData[charData.length-3]),parseInt(charData[charData.length-2]),parseInt(charData[charData.length-1])]
 	showData(i);
 	let e = document.querySelectorAll(".skillContainer")[i].querySelector("#cross")
@@ -119,7 +118,6 @@ function calcArea() {
 		switch(areaArray[i][1]) {
 			//Circle
 			case 0:
-				console.log(areaArray)
 				showCircleArea(i,areaArray[i][2],Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
 				break;
 			
@@ -140,6 +138,7 @@ function calcArea() {
 				
 			//Section
 			case 4:
+				showSectionArea(i,areaArray[i][2],areaArray[i][3],Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
 				break;
 				
 			//Catch
@@ -272,6 +271,14 @@ function showCrossArea(id,width,height,xoffset,yoffset,kind,degrees) {
 	}
 	X.style.transform = "rotate("+(270+degrees)+"deg)"
 	X.style.backgroundColor = getComputedStyle(sc[id].querySelector(".skill")).backgroundColor;
+}
+
+function showSectionArea(id,radius,angle,xoffset,yoffset) {
+	let color = id == 0 ? "#92eb34" : "#ffeb3b";
+	let deg = parseInt(angle);
+	showCircleArea(id,radius,xoffset,yoffset);
+	sc[id].querySelector(".skill").style.backgroundColor = "transparent";
+	sc[id].querySelector(".skill").style.backgroundImage = `conic-gradient(from ${-deg/2}deg, ${color} ${deg}deg, transparent 0deg)`;
 }
 
 function test(width,height) {
