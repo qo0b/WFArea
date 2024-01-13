@@ -276,7 +276,7 @@ function showCrossArea(id,width,height,xoffset,yoffset,kind,degrees) {
 function showSectionArea(id,radius,angle,xoffset,yoffset) {
 	let color = id == 0 ? "#92eb34" : "#ffeb3b";
 	let deg = parseInt(angle);
-	showCircleArea(id,2*radius,xoffset,yoffset);
+	showCircleArea(id,radius,xoffset,yoffset);
 	sc[id].querySelector(".skill").style.backgroundColor = "transparent";
 	sc[id].querySelector(".skill").style.backgroundImage = `conic-gradient(from ${-deg/2}deg, ${color} ${deg}deg, transparent 0deg)`;
 }
