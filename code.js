@@ -118,27 +118,27 @@ function calcArea() {
 		switch(areaArray[i][1]) {
 			//Circle
 			case 0:
-				showCircleArea(i,areaArray[i][2],Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
+				showCircleArea(i,areaArray[i][2]*2,Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
 				break;
 			
 			//BeamUpper
 			case 1:
-				showBeamUpperArea(i,areaArray[i][2]/2,areaArray[i][3]/2,areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
+				showBeamUpperArea(i,areaArray[i][2],areaArray[i][3],areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
 				break;
 				
 			//BeamMiddle
 			case 2:
-				showBeamMiddleArea(i,areaArray[i][2]/2,areaArray[i][3]/2,areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
+				showBeamMiddleArea(i,areaArray[i][2],areaArray[i][3],areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
 				break;
 			
 			//Cross
 			case 3:
-				showCrossArea(i,areaArray[i][2]/2,areaArray[i][3]/2,areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
+				showCrossArea(i,areaArray[i][2],areaArray[i][3],areaArray[i][4],areaArray[i][5],areaArray[i][6],areaArray[i][7])
 				break;
 				
 			//Section
 			case 4:
-				showSectionArea(i,areaArray[i][2],areaArray[i][3],Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
+				showSectionArea(i,areaArray[i][2]*2,areaArray[i][3],Math.abs(areaArray[i][4]),Math.abs(areaArray[i][5]))
 				break;
 				
 			//Catch
