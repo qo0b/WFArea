@@ -220,8 +220,8 @@ function showCircleArea(id,radius,xoffset,yoffset) {
 	sc[id].querySelector(".skill").style.width = (radius*resRatio) + "px";
 	sc[id].querySelector(".skill").style.height = (radius*resRatio) + "px";
 	sc[id].querySelector(".skill").style.borderRadius = "50%";
-	yoffset = yoffset*resRatio/2
-	xoffset = xoffset*resRatio/2
+	yoffset = yoffset*resRatio
+	xoffset = xoffset*resRatio
 	sc[id].querySelector(".skill").style.left = parseInt(pb.style.left)+8 - ((radius/2)*resRatio);
 	sc[id].querySelector(".skill").style.top = parseInt(pb.style.top)+8 - ((radius/2)*resRatio);
 	sc[id].querySelector(".skill").style.top = parseInt(sc[id].querySelector(".skill").style.top) - yoffset
